@@ -11,7 +11,6 @@ public class MainLobbyUIController : MonoBehaviour
     [SerializeField] AudioClip bgm;
 
     [Header("오브젝트")]
-    [SerializeField] GameObject transition;
     [SerializeField] GameObject MidUIBase;
     [SerializeField] GameObject[] MidUI;
 
@@ -20,6 +19,9 @@ public class MainLobbyUIController : MonoBehaviour
     [SerializeField] Text room_mode_text;
     [SerializeField] Text room_maxPlayer_text;
     [SerializeField] Text room_isVisible_text;
+
+    [Header("애니메이터")]
+    [SerializeField] Animator transitionAnimator;
 
     [Header("파라미터")]
     [SerializeField] float speed_transition;
@@ -43,8 +45,7 @@ public class MainLobbyUIController : MonoBehaviour
 
     private void Start()
     {
-        transition.SetActive(true);
-        StartCoroutine(OnEnterGame());
+        transitionAnimator.SetTrigger("out");
         username = PlayerPrefs.GetString("USERNAME");
         username_text.text = username;
         MidUIBase.SetActive(false);
@@ -103,16 +104,6 @@ public class MainLobbyUIController : MonoBehaviour
             {
                 MidUI[i].SetActive(false);
             }
-        }
-    }
-    #endregion
-    #region Transition
-    IEnumerator OnEnterGame()
-    {
-        while (Vector3.Distance(transition.transform.localPosition, targetPosTransition) > 0.01f)
-        {
-            transition.transform.localPosition = Vector3.Lerp(transition.transform.localPosition, targetPosTransition, Time.deltaTime * speed_transition);
-            yield return null;
         }
     }
     #endregion

@@ -11,11 +11,11 @@ public class LoginUIController : MonoBehaviour
     [SerializeField] AudioClip enter;
 
     [Header("오브젝트")]
-    [SerializeField] GameObject transition;
     [SerializeField] Text errorText;
 
     [Header("애니메이터")]
     [SerializeField] Animator animator;
+    [SerializeField] Animator transitionAnimator;
 
     [Header("파라미터")]
     [SerializeField] float speed_transition;
@@ -54,16 +54,6 @@ public class LoginUIController : MonoBehaviour
     public void EnterGame()
     {
         Debug.Log("EnterGame");
-        StartCoroutine(EnterGame_());
-    }
-    IEnumerator EnterGame_()
-    {
-        SoundManager.Instance.OnSceneLoading();
-        while (Vector3.Distance(transition.transform.localPosition, Vector3.zero) > 0.2f)
-        {
-            transition.transform.localPosition = Vector3.Lerp(transition.transform.localPosition, Vector3.zero, Time.deltaTime * speed_transition);
-            yield return null;
-        }
-        SceneManager.LoadScene("Main");
+        transitionAnimator.SetTrigger("in");
     }
 }
