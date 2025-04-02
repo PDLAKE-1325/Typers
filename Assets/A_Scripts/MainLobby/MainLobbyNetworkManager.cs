@@ -19,7 +19,7 @@ public class MainLobbyNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] int room_maxPlayer;
     [SerializeField] bool room_isPrivate;
     [SerializeField] string username;
-    public Action<string, int?, bool?> room_option_changed;
+    [SerializeField] MainLobbyUIController uiController;
 
     [Header("요소들")]
     [SerializeField] Text modeText;
@@ -129,7 +129,7 @@ public class MainLobbyNetworkManager : MonoBehaviourPunCallbacks
     }
     void RoomUIUpdate(string mode = null, int? max_player = null, bool? is_private = null)
     {
-        room_option_changed?.Invoke(mode, max_player, is_private);
+        uiController.OnRoomOptionChanged(mode,max_player,is_private);
     }
     #endregion
 
@@ -188,6 +188,7 @@ public class MainLobbyNetworkManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log($"[+] 방 생성 : {PhotonNetwork.CurrentRoom.Name}");
+        
     }
 
     public override void OnLeftRoom()

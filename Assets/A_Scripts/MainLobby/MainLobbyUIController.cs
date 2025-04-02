@@ -49,7 +49,6 @@ public class MainLobbyUIController : MonoBehaviour
         username = PlayerPrefs.GetString("USERNAME");
         username_text.text = username;
         MidUIBase.SetActive(false);
-        GetComponent<MainLobbyNetworkManager>().room_option_changed = OnRoomOptionChanged;
         for (int i = 0; i < MidUI.Length; i++)
         {
             MidUI[i].SetActive(false);
