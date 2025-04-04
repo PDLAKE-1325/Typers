@@ -96,6 +96,7 @@ public class LoginManager : MonoBehaviour
     void OnFailure(PlayFabError error)
     {
         Debug.Log($"에러 발생 잠시 후 다시 실행바람 : {error.GenerateErrorReport()}");
+        uiController.LoadingTextShow(false);
         if (error.GenerateErrorReport() != "/Client/UpdateUserTitleDisplayName: Name not available")
             uiController.OpenErrorText("잠시 후 시도하거나 다른 이름으로 설정해주세요.");
     }
@@ -116,6 +117,7 @@ public class LoginManager : MonoBehaviour
     {
         if (IsValidUsername())
         {
+            uiController.LoadingTextShow();
             LoginWithCustomId();
         }
         else

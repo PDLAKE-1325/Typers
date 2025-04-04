@@ -12,6 +12,7 @@ public class LoginUIController : MonoBehaviour
 
     [Header("오브젝트")]
     [SerializeField] Text errorText;
+    [SerializeField] Text loadingText;
 
     [Header("애니메이터")]
     [SerializeField] Animator animator;
@@ -45,6 +46,9 @@ public class LoginUIController : MonoBehaviour
         errorText.gameObject.SetActive(true);
         errorText.text = text;
         Invoke("CloseErrorText", 1.5f);
+    }
+    public void LoadingTextShow(bool show=true){
+        loadingText.gameObject.SetActive(show);
     }
     void CloseErrorText()
     {
